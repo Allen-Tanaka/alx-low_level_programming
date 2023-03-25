@@ -21,8 +21,7 @@ int main(void)
 			printf("Buzz");
 		else
 			printf("%i", i);
-		if (i < 99)
-			printf(" ");
+		printf(" ");
 	}
 	printf("\n");
 	return (0);
