@@ -11,13 +11,12 @@
 char *cap_string(char *a)
 {
 	int i = 0;
+	int s = a[i - 1];
 
 	while (a[i])
 	{
 		while (!((a[i] >= 'a') && (a[i] <= 'z')))
 			i++;
-
-		int s = a[i - 1];
 		
 		if (s == ' ' || s == '\t' || s == '\n' || s == ',' || s == ';' ||
 			s == '.' || s == '!' || s == '?' || s == '"' ||
