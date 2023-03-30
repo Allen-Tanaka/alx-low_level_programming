@@ -10,13 +10,16 @@
 
 char *leet(char *s)
 {
-	int i = 0;
+	int i = 0, j;
 	char a1[] = "aAeEoOtTlL", a2[] = "4433007711";
 
-	while ((s[i] != '\0') && (i < 10))
+	while ((s[i] != '\0'))
 	{
-		if (s[i] == a1[i])
-			s[i] = a2[i];
+		for (j = 0; j < 10; j++)
+		{
+			if (s[i] == a1[j])
+			s[i] = a2[j];
+		}
 		i++;
 	}
 	return (s);
