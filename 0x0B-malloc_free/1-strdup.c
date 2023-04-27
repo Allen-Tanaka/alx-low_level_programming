@@ -1,6 +1,6 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdlib>
+#include <stdlib.h>
 
 /**
  * _strdup - duplicate to new memory space location
@@ -13,10 +13,10 @@
 char *_strdup(char *str)
 {
 	char *aaa;
-	int i = 0, r = 0;
+	int i = 0, r;
 
 	if (str == NULL)
-		return (NULL)
+		return (NULL);
 	while (str[i] != '\0')
 		i++;
 
@@ -24,7 +24,7 @@ char *_strdup(char *str)
 
 	if (aaa == NULL)
 		return (NULL);
-	for (r; str[r]; r++)
+	for (r = 0; str[r]; r++)
 		aaa[r] = str[r];
 	return (aaa);
 }
