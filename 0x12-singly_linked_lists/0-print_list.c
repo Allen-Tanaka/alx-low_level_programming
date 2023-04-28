@@ -2,7 +2,7 @@
 #include "lists.h"
 
 /**
- * print_list - function printsing all the elements of a linked list
+ * print_list - function printing all the elements of a linked list
  *
  * @h: pointer to the list_t list to print
  *
@@ -24,4 +24,3 @@ size_t print_list(const list_t *h)
 	}
 	return (i);
 }
-
