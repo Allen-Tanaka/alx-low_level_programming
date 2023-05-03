@@ -2,7 +2,7 @@
 
 /**
  * add_nodeint - fn adding new node of linked list
- * 
+ *
  * @head: pointer
  * @n: data to put in new node
  *
