@@ -5,24 +5,25 @@
 /**
  * *_memset - fn filling memory with a constant byte
  *
- * @a: memory area
+ * @s: memory area
  * @b: char to copy
  * @n: number of times to copy b
  *
  * Return: pointer to the memory area
  */
 
-char *_memset(char *a, char c, unsigned int n)
+char *_memset(char *s, char b, unsigned int n)
 {
-        unsigned int i = 0;
+	unsigned int i = 0;
 
-        while (i < n)
-        {
-                a[i] = c;
-                i++;
-        }
-        return (a);
+	while (i < n)
+	{
+		s[i] = b;
+		i++;
+	}
+	return (s);
 }
+
 
 
 /**
