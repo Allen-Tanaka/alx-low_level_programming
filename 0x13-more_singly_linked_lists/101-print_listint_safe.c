@@ -6,10 +6,10 @@ size_t print_listint_safe(const listint_t *head);
 
 /**
  * looped_listint_len - fn that counts the number of unique nodes
- * 
- * @head: pointer to the head of the listint_t to check.
  *
- * Return: 
+ * @head: pointer to the head of the listint_t to check
+ *
+ * Return: If the function fails, exit the program with status 98
  */
 
 size_t looped_listint_len(const listint_t *head)
