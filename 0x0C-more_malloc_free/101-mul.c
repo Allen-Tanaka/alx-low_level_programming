@@ -50,16 +50,14 @@ char *_initialize_array(char *ar, int lar)
 	ar[lar] = '\0';
 	return (ar);
 }
-
 /**
- * _checknum - fn that determines length of the number and checks if number is in base 10
+ * _checknum - fn that determines length of a number checks its base
  *
  * @argv: arguments vector.
  * @n: row of the array.
  *
  * Return: length of the number.
  */
-
 int _checknum(char *argv[], int n)
 {
 	int len;
