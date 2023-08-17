@@ -13,9 +13,9 @@ void execute_command(char *cmd)
 	size_t len = strlen(cmd);
 
 	/* remove new line character */
-	if (len > 0 && cmd[len-1] == '\n')
+	if (len > 0 && cmd[len - 1] == '\n')
 	{
-		cmd[len-1] = '\0';
+		cmd[len - 1] = '\0';
 	}
 
 	/* fork child process */
@@ -27,7 +27,7 @@ void execute_command(char *cmd)
 		return;
 	}
 
-	if (pid == 0) 
+	if (pid == 0)
 	{
 		if (execlp(cmd, cmd, NULL) == -1)
 		{
@@ -35,14 +35,15 @@ void execute_command(char *cmd)
 			exit(1);
 		}
 	}
-	else // Parent process
+	else /* Parent process */
 	{
 		int status;
-		waitpid(pid, &status, 0); //wait for child to finish
+
+		waitpid(pid, &status, 0); /* wait for child to finish */
 	}
 }
 
-int main()
+int main(void)
 {
 	char input[MAX_INPUT_SIZE];
 
@@ -50,7 +51,7 @@ int main()
 	{
 		printf("$ ");
 
-		//Get user input
+		/* Get user input */
 		if (fgets(input, sizeof(input), stdin) == NULL)
 		{
 			printf("\n");
@@ -60,5 +61,5 @@ int main()
 		execute_command(input);
 	}
 
-	return 0;
+	return (0);
 }
