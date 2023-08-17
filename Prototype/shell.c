@@ -1,7 +1,6 @@
 #include "shell.h"
 
 /**
- * main function - shell main loop
  * execute_command - executes a cmd by user.
  * @cmd: Command to exec.
  *
@@ -42,6 +41,12 @@ void execute_command(char *cmd)
 		waitpid(pid, &status, 0); /* wait for child to finish */
 	}
 }
+
+/**
+ * main - simple shell executing commands from user.
+ *
+ * Return: Always 0.
+ */
 
 int main(void)
 {
