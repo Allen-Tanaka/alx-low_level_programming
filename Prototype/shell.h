@@ -10,6 +10,7 @@
 
 #define MAX_INPUT_SIZE 1024
 
+/* Prototypes */
 void execute_command(char *cmd);
 
 #endif
