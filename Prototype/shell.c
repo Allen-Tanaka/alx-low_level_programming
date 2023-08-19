@@ -10,6 +10,9 @@
 void execute_command(char *cmd)
 {
 	size_t len = strlen(cmd);
+	pid_t pid;
+	int status, arg_count = 0;
+	char *args[MAX_INPUT_SIZE / 2], *token = strtok(cmd, " ");
 
 	/* remove new line character */
 	if (len > 0 && cmd[len - 1] == '\n')
@@ -17,8 +20,16 @@ void execute_command(char *cmd)
 		cmd[len - 1] = '\0';
 	}
 
+	/*Tokenize input to split command and its args*/
+	while (token != NULL)
+	{
+		args[arg_count++] = token;
+		token = strtok(NULL, " ");
+	}
+	args[arg_count] = NULL;
+
 	/* fork child process */
-	pid_t pid = fork();
+	pid = fork();
 
 	if (pid < 0)
 	{
@@ -36,8 +47,6 @@ void execute_command(char *cmd)
 	}
 	else /* Parent process */
 	{
-		int status;
-
 		waitpid(pid, &status, 0); /* wait for child to finish */
 	}
 }
