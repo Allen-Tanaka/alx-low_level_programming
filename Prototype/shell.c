@@ -12,7 +12,8 @@ void execute_command(char *cmd)
 	size_t len = strlen(cmd);
 	pid_t pid;
 	int status, arg_count = 0;
-	char *args[MAX_INPUT_SIZE / 2], *token = strtok(cmd, " ");
+	char *args[MAX_INPUT_SIZE / 2];
+	char *token = strtok(cmd, " ");
 
 	/* remove new line character */
 	if (len > 0 && cmd[len - 1] == '\n')
