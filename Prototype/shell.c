@@ -12,8 +12,7 @@ void execute_command(char *cmd)
 	size_t len = strlen(cmd);
 	pid_t pid;
 	int status, arg_count = 0;
-	char *args[MAX_INPUT_SIZE / 2];
-	char *token = strtok(cmd, " ");
+	char *args[MAX_INPUT_SIZE / 2], *token = strtok(cmd, " ");
 
 	/* remove new line character */
 	if (len > 0 && cmd[len - 1] == '\n')
@@ -28,16 +27,15 @@ void execute_command(char *cmd)
 		token = strtok(NULL, " ");
 	}
 	args[arg_count] = NULL;
+	(void) args;
 
 	/* fork child process */
 	pid = fork();
-
 	if (pid < 0)
 	{
 		perror("Failed to fork");
 		return;
 	}
-
 	if (pid == 0)
 	{
 		if (execlp(cmd, cmd, NULL) == -1)
@@ -48,7 +46,7 @@ void execute_command(char *cmd)
 	}
 	else /* Parent process */
 	{
-		waitpid(pid, &status, 0); /* wait for child to finish */
+		waitpid(pid, &status, 0);/* wait for child to finish */
 	}
 }
 
