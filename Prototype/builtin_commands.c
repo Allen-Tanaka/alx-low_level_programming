@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * is_exit_comman - functio that checks if the command is "exit"
+ * is_exit_command - function that checks if the command is "exit"
  * @str: string
  *
  * Return: 1(if it is 'exit'), 0 otherwise
