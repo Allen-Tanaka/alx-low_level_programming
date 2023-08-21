@@ -1,5 +1,44 @@
-#includie "shell.h"
+#include "shell.h"
 
+/* FUNCTION 1 */
+/**
+ * _strlen - checks len of string.
+ * @s: string.
+ * Return: Length of string.
+ */
+
+size_t _strlen(char *s)
+{
+	size_t len = 0;
+	while (*s++)
+		len++;
+	return (len);
+}
+
+
+/* FUNCTION 2 */
+/**
+ * dup - function tha duplicates string.
+ * @s: string.
+ * Return: pointer to dup string.
+ */
+
+char *_dup(const char *s)
+{
+	size_t len = _strlen((char *)s) + 1;
+	char *d = malloc(len);
+	int i;
+
+	if (!d)
+		return(NULL);
+	for (i = 0; i < len; i++)
+		d[i] = s[i];
+	return (d);
+}
+
+/* FUNCTION 3 */
+/**
+ * find_cmd_path(char *
 /**
  * execute_command - executes a cmd by user.
  * @cmd: Command to exec.
