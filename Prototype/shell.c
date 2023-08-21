@@ -12,7 +12,7 @@ size_t str_len(const char *str)
 
 	while (str[len])
 		len++;
-	return len;
+	return (len);
 }
 
 /**
@@ -77,5 +77,5 @@ int main(void)
 		execute_command(input);
 	}
 
-	retur (0);
+	return (0);
 }
