@@ -65,7 +65,7 @@ int main(void)
 	while (1)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
-		bytes_reads = read(STDIN_FILENO, input, sizeof(input) - 1);
+		bytes_read = read(STDIN_FILENO, input, sizeof(input) - 1);
 
 		if (bytes_read <= 0)
 		{
