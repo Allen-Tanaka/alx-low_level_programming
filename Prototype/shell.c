@@ -1,127 +1,89 @@
 #include "shell.h"
 
-/* FUNCTION 1 */
 /**
- * _strlen - checks len of string.
- * @s: string.
- * Return: Length of string.
- */
-
-size_t _strlen(char *s)
-{
-	size_t len = 0;
-	while (*s++)
-		len++;
-	return (len);
-}
-
-
-/* FUNCTION 2 */
-/**
- * dup - function tha duplicates string.
- * @s: string.
- * Return: pointer to dup string.
- */
-
-char *_dup(const char *s)
-{
-	size_t len = _strlen((char *)s) + 1;
-	char *d = malloc(len);
-	int i;
-
-	if (!d)
-		return(NULL);
-	for (i = 0; i < len; i++)
-		d[i] = s[i];
-	return (d);
-}
-
-/* FUNCTION 3 */
-/**
- * find_cmd_path(char *
-/**
- * execute_command - executes a cmd by user.
- * @cmd: Command to exec.
+ * str_len - Custom function to calculate the length of a string.
+ * @str: The string.
  *
- * Return: 0.
+ * Return: The length of the string.
  */
+size_t str_len(const char *str)
+{
+    size_t len = 0;
 
+    while (str[len])
+        len++;
+
+    return len;
+}
+
+/**
+ * execute_command - Executes a command provided by the user.
+ * @cmd: Command to execute.
+ */
 void execute_command(char *cmd)
 {
-	size_t len = strlen(cmd);
-	pid_t pid;
-	int status, arg_count = 0;
-	char *args[MAX_INPUT_SIZE / 2], *token = strtok(cmd, " ");
-	char *cmd_path = find_cmd_path(args[0]);
+    pid_t pid;
+    int status, arg_count = 0;
+    char *args[MAX_INPUT_SIZE / 2], *token;
 
-	/* remove new line character */
-	if (len > 0 && cmd[len - 1] == '\n')
-	{
-		cmd[len - 1] = '\0';
-	}
+    if (cmd[str_len(cmd) - 1] == '\n')
+        cmd[str_len(cmd) - 1] = '\0';
 
-	/*Tokenize input to split command and its args*/
-	while (token)
-	{
-		args[arg_count++] = token;
-		token = strtok(NULL, " ");
-	}
-	args[arg_count] = NULL;
-	if (!cmd_path)
-	{
-		write (STDERR_FILENO, " Command not found: ", 18);
-		write (STDERR_FILENO, args[0], _strlen(args[0]));
-		write (STDERR_FILENO, "\n", 1);
-		return;
-	}
+    token = strtok(cmd, " ");
+    while (token)
+    {
+        args[arg_count++] = token;
+        token = strtok(NULL, " ");
+    }
+    args[arg_count] = NULL;
 
-	/* fork child process */
-	pid = fork();
-	if (pid < 0)
-	{
-		perror("Failed to fork");
-		free(cmd_path);
-		return;
-	}
-	if (pid == 0)
-	{
-		if (execve(cmd_path, args, NULL) == -1)
-		{
-			perror("Failed to execute command");
-			free(cmd_path);
-			exit(1);
-		}
-	}
-	else /* Parent process */
-	{
-		waitpid(pid, &status, 0);/* wait for child to finish */
-	}
-	free(cmd_path);
+    if (handle_exit(args))
+        return;
+
+    pid = fork();
+    if (pid == 0)
+    {
+        if (execve(cmd, args, NULL) == -1)
+        {
+            perror("Failed to execute command");
+            exit(1);
+        }
+    }
+    else if (pid < 0)
+    {
+        perror("Failed to fork");
+    }
+    else
+    {
+        waitpid(pid, &status, 0);
+    }
 }
 
 /**
- * main - simple shell executing commands from user.
+ * main - A simple shell that executes commands from the user.
  *
  * Return: Always 0.
  */
-
 int main(void)
 {
-	char input[MAX_INPUT_SIZE];
+    char input[MAX_INPUT_SIZE];
+    ssize_t bytes_read;
 
-	while (1)
-	{
-		write(STDOUT_FILENO, "$ ", 2);
+    while (1)
+    {
+        write(STDOUT_FILENO, "$ ", 2);
+        bytes_read = read(STDIN_FILENO, input, sizeof(input) - 1);
 
-		/* Get user input */
-		if (getline(&input, &MAX_INPUT_SIZE, stdin) == -1)
-		{
-			write(STDOUT_FILENO, "\n", 1);
-			exit(0);
-		}
+        if (bytes_read <= 0)
+        {
+            write(STDOUT_FILENO, "\n", 1);
+            exit(0);
+        }
 
-		execute_command(input);
-	}
+        input[bytes_read] = '\0';
+        execute_command(input);
+    }
 
-	return (0);
+    return (0);
 }
+
