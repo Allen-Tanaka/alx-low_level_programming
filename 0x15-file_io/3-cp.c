@@ -3,6 +3,8 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+void error_exit(int code, const char *filename, int fd);
+
 /**
  * main - Entry point, copies one file to another.
  * @argc: Number of arguments.
