@@ -61,7 +61,7 @@ void error_exit(int cd, const char *filename, int fd)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
 	else if (cd == 99)
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-	else
+	else if (cd == 100)
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 
 	exit(cd);
