@@ -7,9 +7,6 @@
  * main - Entry point, copies one file to another.
  * @argc: Number of arguments.
  * @argv: arguments vector.
- * @fd: file descriptor causing error.
- * @cd: error code.
- * @filename: name of file causing error.
  *
  * Return: 0 (Success), 1 (failure)
  */
